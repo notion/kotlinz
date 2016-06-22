@@ -1,3 +1,5 @@
+artifact 'function-kotlin'
+
 apply plugin: 'kotlin'
 
 sourceSets {
