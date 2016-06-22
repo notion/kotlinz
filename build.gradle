@@ -5,7 +5,7 @@ buildscript {
     ext.kotlinVersion = '1.0.2'
 
     repositories {
-        mavenCentral()
+        jcenter()
     }
 
     dependencies {
@@ -13,8 +13,12 @@ buildscript {
     }
 }
 
-apply plugin: 'kotlin'
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
 
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+ext {
+    kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
