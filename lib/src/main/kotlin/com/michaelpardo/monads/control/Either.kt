@@ -4,19 +4,42 @@ import com.michaelpardo.monads.algebra.Monad
 
 sealed class Either<A : Any, B : Any> : Monad<B> {
 
+	abstract val isLeft: Boolean
+	abstract val isRight: Boolean
+
+	abstract fun <C : Any> mapLeft(f: (A) -> C): Either<C, B>
+
+	abstract fun <C : Any> mapRight(f: (B) -> C): Either<A, C>
+
 	class Left<A : Any, B : Any>(val value: A) : Either<A, B>() {
 
-		override fun <T : Any> fmap(f: (B) -> T) = Left<A, T>(value)
+		override val isLeft = true
 
-		override fun <T : Any> bind(f: (B) -> Monad<T>) = Left<A, T>(value)
+		override val isRight = false
+
+		override fun <C : Any> fmap(f: (B) -> C) = Left<A, C>(value)
+
+		override fun <C : Any> bind(f: (B) -> Monad<C>) = Left<A, C>(value)
+
+		override fun <C : Any> mapLeft(f: (A) -> C) = Left<C, B>(f(value))
+
+		override fun <C : Any> mapRight(f: (B) -> C) = Left<A, C>(value)
 
 	}
 
 	class Right<A : Any, B : Any>(val value: B) : Either<A, B>() {
 
-		override fun <T : Any> fmap(f: (B) -> T) = Right<A, T>(f(value))
+		override val isLeft = false
 
-		override fun <T : Any> bind(f: (B) -> Monad<T>) = f(value)
+		override val isRight = true
+
+		override fun <C : Any> fmap(f: (B) -> C) = Right<A, C>(f(value))
+
+		override fun <C : Any> bind(f: (B) -> Monad<C>) = f(value)
+
+		override fun <C : Any> mapLeft(f: (A) -> C) = Right<C, B>(value)
+
+		override fun <C : Any> mapRight(f: (B) -> C) = Right<A, C>(f(value))
 
 	}
 
