@@ -1,0 +1,20 @@
+group 'com.michaelpardo'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlinVersion = '1.0.2'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+apply plugin: 'kotlin'
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+}
