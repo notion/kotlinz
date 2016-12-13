@@ -2,6 +2,10 @@ package ai.notion.kotlin.functional.algebra
 
 interface Monoid<A : Any> : Semigroup<A> {
 
-	fun empty(): A
+    interface Companion {
+
+        fun <A : Monoid<*>> empty(): A
+
+    }
 
 }
