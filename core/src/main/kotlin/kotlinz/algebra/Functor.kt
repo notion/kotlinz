@@ -1,4 +1,4 @@
-package ai.notion.kotlinz.algebra
+package kotlinz.algebra
 
 interface Functor<A : Any> {
 

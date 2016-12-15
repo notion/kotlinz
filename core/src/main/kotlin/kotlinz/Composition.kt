@@ -1,4 +1,4 @@
-package ai.notion.kotlinz
+package kotlinz
 
 infix fun <A, B, C> ((B) -> C).compose(f: (A) -> B): ((A) -> C) = { a: A -> this(f(a)) }
 

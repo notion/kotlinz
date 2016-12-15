@@ -1,10 +1,10 @@
-package ai.notion.kotlinz.control
+package kotlinz.control
 
-import ai.notion.kotlinz.algebra.Applicative
-import ai.notion.kotlinz.algebra.Apply
-import ai.notion.kotlinz.algebra.Bind
-import ai.notion.kotlinz.algebra.Functor
-import ai.notion.kotlinz.algebra.Monad
+import kotlinz.algebra.Applicative
+import kotlinz.algebra.Apply
+import kotlinz.algebra.Bind
+import kotlinz.algebra.Functor
+import kotlinz.algebra.Monad
 
 sealed class Maybe<A : Any> : Monad<A> {
 

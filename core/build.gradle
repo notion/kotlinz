@@ -1,8 +1,8 @@
-apply plugin: 'kotlinz'
+apply plugin: 'kotlin'
 
 sourceSets {
-	main.kotlin.srcDirs += 'src/main/kotlinz'
-	main.java.srcDirs += 'src/main/kotlinz'
+	main.kotlin.srcDirs += 'src/main/kotlin'
+	main.java.srcDirs += 'src/main/kotlin'
 }
 
 dependencies {

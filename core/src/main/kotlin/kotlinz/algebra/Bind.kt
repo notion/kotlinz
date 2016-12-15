@@ -1,4 +1,4 @@
-package ai.notion.kotlinz.algebra
+package kotlinz.algebra
 
 interface Bind<A : Any> : Apply<A> {
 
