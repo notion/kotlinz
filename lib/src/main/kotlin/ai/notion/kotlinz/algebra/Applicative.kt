@@ -1,4 +1,4 @@
-package ai.notion.kotlin.functional.algebra
+package ai.notion.kotlinz.algebra
 
 interface Applicative<A : Any> : Apply<A> {
 

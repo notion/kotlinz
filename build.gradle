@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlinz:kotlinz-gradle-plugin:$kotlinVersion"
     }
 }
 
@@ -20,5 +20,5 @@ allprojects {
 }
 
 ext {
-    kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    kotlinStdLib = "org.jetbrains.kotlinz:kotlinz-stdlib:$kotlinVersion"
 }
