@@ -2,7 +2,6 @@ package kotlinz.control
 
 import kotlinz.algebra.Apply
 import kotlinz.algebra.Bind
-import kotlinz.algebra.Functor
 import kotlinz.algebra.Monad
 import kotlinz.control.Maybe.Empty
 
@@ -34,11 +33,11 @@ sealed class Either<A : Any, B : Any> : Monad<B> {
 
 		override fun right(): Maybe<B> = Empty.of()
 
-		override fun <C : Any> map(f: (B) -> C): Functor<C> = Left(value)
+		override fun <C : Any> map(f: (B) -> C): Either<A, C> = Left(value)
 
-		override fun <C : Any> apply(a: Apply<(B) -> C>): Apply<C> = Left(value)
+		override fun <C : Any> apply(a: Apply<(B) -> C>): Either<A, C> = Left(value)
 
-		override fun <C : Any> bind(f: (B) -> Bind<C>): Bind<C> = Left(value)
+		override fun <C : Any> bind(f: (B) -> Bind<C>): Either<A, C> = Left(value)
 
 	}
 
@@ -52,11 +51,11 @@ sealed class Either<A : Any, B : Any> : Monad<B> {
 
 		override fun right(): Maybe<B> = Maybe.of(value)
 
-		override fun <C : Any> map(f: (B) -> C): Functor<C> = Right<A, C>(f(value))
+		override fun <C : Any> map(f: (B) -> C): Either<A, C> = Right(f(value))
 
-		override fun <C : Any> apply(a: Apply<(B) -> C>): Apply<C> = TODO()
+		override fun <C : Any> apply(a: Apply<(B) -> C>): Either<A, C> = TODO()
 
-		override fun <C : Any> bind(f: (B) -> Bind<C>): Bind<C> = TODO()
+		override fun <C : Any> bind(f: (B) -> Bind<C>): Either<A, C> = TODO()
 
 	}
 

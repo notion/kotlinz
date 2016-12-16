@@ -21,11 +21,11 @@ sealed class Maybe<A : Any> : Monad<A> {
 
 	class Empty<A : Any> private constructor() : Maybe<A>() {
 
-		override fun <B : Any> map(f: (A) -> B) = Empty<B>()
+		override fun <B : Any> map(f: (A) -> B): Maybe<B> = Empty()
 
-		override fun <B : Any> apply(a: Apply<(A) -> B>) = Empty<B>()
+		override fun <B : Any> apply(a: Apply<(A) -> B>): Maybe<B> = Empty()
 
-		override fun <B : Any> bind(f: (A) -> Bind<B>) = Empty<B>()
+		override fun <B : Any> bind(f: (A) -> Bind<B>): Maybe<B> = Empty()
 
 		companion object {
 
@@ -42,7 +42,7 @@ sealed class Maybe<A : Any> : Monad<A> {
 
 		override fun <B : Any> map(f: (A) -> B): Functor<B> = bind { Maybe.of(f(it)) }
 
-		override fun <B : Any> apply(a: Apply<(A) -> B>): Apply<B> = when (a) {
+		override fun <B : Any> apply(a: Apply<(A) -> B>): Maybe<B> = when (a) {
 			is Just -> Just(a.value(value))
 			else -> Empty.of()
 		}
