@@ -62,9 +62,9 @@ sealed class Either<A : Any, B : Any> : Monad<B> {
 
 	companion object {
 
-		fun <A : Any, B : Any> ofLeft(value: A) = Left<A, B>(value)
+		fun <A : Any, B : Any> ofLeft(value: A): Either<A, B> = Left(value)
 
-		fun <A : Any, B : Any> ofRight(value: B) = Right<A, B>(value)
+		fun <A : Any, B : Any> ofRight(value: B): Either<A, B> = Right(value)
 
 	}
 
