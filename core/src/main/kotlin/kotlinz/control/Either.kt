@@ -12,6 +12,10 @@ sealed class Either<A : Any, B : Any> : Monad<B> {
 	abstract fun left(): Maybe<A>
 	abstract fun right(): Maybe<B>
 
+	abstract override fun <C : Any> map(f: (B) -> C): Either<A, C>
+	abstract override fun <C : Any> apply(a: Apply<(B) -> C>): Either<A, C>
+	abstract override fun <C : Any> bind(f: (B) -> Bind<C>): Either<A, C>
+
 	fun <C : Any> cata(f: (B) -> C, c: () -> C): C = when (this) {
 		is Left -> c()
 		is Right -> f(value)
