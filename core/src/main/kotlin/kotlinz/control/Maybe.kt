@@ -11,6 +11,8 @@ sealed class Maybe<A : Any> : Monad<A> {
     abstract override fun <B : Any> apply(a: Apply<(A) -> B>): Maybe<B>
     abstract override fun <B : Any> bind(f: (A) -> Bind<B>): Maybe<B>
 
+    abstract override fun toString(): String
+
     fun <B : Any> cata(f: (A) -> B, b: () -> B): B = when (this) {
         is Just -> f(value)
         is Empty -> b()
@@ -30,6 +32,8 @@ sealed class Maybe<A : Any> : Monad<A> {
 
         override fun <B : Any> bind(f: (A) -> Bind<B>): Maybe<B> = Empty()
 
+        override fun toString() = "[EMPTY]"
+
         companion object {
 
             private val INSTANCE = Empty<Any>()
@@ -42,7 +46,6 @@ sealed class Maybe<A : Any> : Monad<A> {
     }
 
     class Just<A : Any>(val value: A) : Maybe<A>() {
-
         override fun <B : Any> map(f: (A) -> B): Maybe<B> = bind { Maybe.of(f(it)) }
 
         override fun <B : Any> apply(a: Apply<(A) -> B>): Maybe<B> = when (a) {
@@ -51,6 +54,8 @@ sealed class Maybe<A : Any> : Monad<A> {
         }
 
         override fun <B : Any> bind(f: (A) -> Bind<B>): Maybe<B> = f(value) as Maybe<B>
+
+        override fun toString() = value.toString()
 
     }
 

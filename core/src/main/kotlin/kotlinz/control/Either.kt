@@ -16,6 +16,8 @@ sealed class Either<A : Any, B : Any> : Monad<B> {
 	abstract override fun <C : Any> apply(a: Apply<(B) -> C>): Either<A, C>
 	abstract override fun <C : Any> bind(f: (B) -> Bind<C>): Either<A, C>
 
+	abstract override fun toString(): String
+
 	fun <C : Any> cata(f: (B) -> C, c: () -> C): C = when (this) {
 		is Left -> c()
 		is Right -> f(value)
@@ -43,6 +45,8 @@ sealed class Either<A : Any, B : Any> : Monad<B> {
 
 		override fun <C : Any> bind(f: (B) -> Bind<C>): Either<A, C> = Left(value)
 
+		override fun toString() = value.toString()
+
 	}
 
 	class Right<A : Any, B : Any>(val value: B) : Either<A, B>() {
@@ -60,6 +64,8 @@ sealed class Either<A : Any, B : Any> : Monad<B> {
 		override fun <C : Any> apply(a: Apply<(B) -> C>): Either<A, C> = TODO()
 
 		override fun <C : Any> bind(f: (B) -> Bind<C>): Either<A, C> = TODO()
+
+		override fun toString() = value.toString()
 
 	}
 
